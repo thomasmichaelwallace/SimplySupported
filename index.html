@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>L_Test</title>
+        <!-- jQuery HTML manipulation libraries -->
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>        
+        <!-- Raphael graphics library -->
+        <script src="js/raphael.js" type="text/javascript" charset="utf-8"></script>
+        <!-- Math.JS evaluation library -->
+        <script src="js/math.js" type="text/javascript" charset="utf-8"></script>       
+        <!-- MathJax equation library -->
+        <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript" charset="utf-8"></script>
+        <!-- Bootstrap component library -->
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+        <!-- Simply Supported libraries -->
+        <script src="js/ss-library.js" type="text/javascript" charset="utf-8"></script>        
+        <script src="js/ss.js" type="text/javascript" charset="utf-8"></script>
+        <!-- Wrapstrap style -->
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"></link>
+        <!-- Additional styling -->
+        <style>
+            .container-fixed {
+                margin: auto;
+                max-width: 640px;
+            }
+            #diagram {
+                margin: auto;
+                width: 600px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container-fixed">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Diagram</div>
+                <div class="panel-body">
+                    <div id="diagram">
+                        <!-- Populates with diagram canvas -->
+                    </div>        
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">           
+                    
+                    <div class="panel panel-primary">            
+                        <div class="panel-heading">Parameters</div>
+                        <div class="panel-body">
+
+                            <div class="btn-group" style="width: 100%;">
+                              <button type="button" class="btn btn-default btn-sm dropdown-toggle" style="width: 100%;" data-toggle="dropdown">
+                                Structure Type <span class="caret"></span>
+                              </button>                              
+                              <ul id="library" class="dropdown-menu" role="menu">
+                                    <!-- Populates with structure library -->
+                              </ul>
+                            </div>
+                            <hr/>
+                            <div id="inputs" class="form-horizontal">
+                                <!-- Populates with parameters -->
+                            </div>
+                        </div>                               
+                    </div>
+                
+                </div>
+                <div class="col-md-6">
+                    
+                    <div class="panel panel-default">            
+                        <div class="panel-heading">Formulae</div>
+                        <div class="panel-body">
+                            <div id="results">
+                                <!-- Populates with results -->
+                            </div>
+                        </div>                                   
+                    </div>                
+                
+                </div>
+            </div>
+                    
+        </div>
+    </body>
+</html>
