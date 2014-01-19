@@ -1,3 +1,20 @@
+//  Simply Supported
+//  Copyright (C) 2014 Thomas Michael Wallace (http://www.thomasmichaelwallace.co.uk)
+
+//  The JavaScript code in this page is free software: you can
+//  redistribute it and/or modify it under the terms of the GNU
+//  General Public License (GNU GPL) as published by the Free Software
+//  Foundation, either version 3 of the License, or (at your option)
+//  any later version.  The code is distributed WITHOUT ANY WARRANTY;
+//  without even the implied warranty of MERCHANTABILITY or FITNESS
+//  FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+//
+//  As additional permission under GNU GPL version 3 section 7, you
+//  may distribute non-source (e.g., minimized or compacted) forms of
+//  that code without the copy of the GNU GPL normally required by
+//  section 4, provided you include this license notice and a URL
+//  through which recipients can access the Corresponding Source.
+
 // === [ GRAPHICS ] ===========================================================
 
 // Raphael library instance.
@@ -284,9 +301,22 @@ function solveStructure(structure) {
 }
 
 function setScope(structure) {
-	// Sets the mathematics scope object up for the structure.
+	// Sets the mathematics scope object up for the structure.	
+	
+	var loading;
+	var loadParams = ["P", "W"];
+	for (var index = 0; index < loadParams.length; ++index) {
+		// Persevere loading as a pseudo-common parameter.
+		if (loadParams[index] in structureScope) { loading = structureScope[loadParams[index]]; }
+	}
+
 	structureScope = {};
-	$.extend(structureScope, commonScope, structure.loadScope, structure.dimScope);
+	$.extend(structureScope, structure.loadScope, structure.dimScope, commonScope);
+	
+	for (var index = 0; index < loadParams.length; ++index) {
+		if (loading != null && loadParams[index] in structureScope) { structureScope[loadParams[index]] = loading; }
+	}
+
 }
 
 function mathScope(structure) {
@@ -333,7 +363,7 @@ function showInputs() {
 		$(inputsDiv).append(
 			'<div class="form-group">' +
 				'<label class="col-md-2 control-label">' + property + '</label>' + 
-				'<div class="col-md-7">' + 
+				'<div class="col-md-10">' + 
 					'<div class="input-group">' +
 						'<input type="text" class="form-control scope" id="' + property + '" value="' + value + '" />' +
 						'<span class="input-group-addon">' + units + '</span>' +
@@ -361,8 +391,13 @@ function setScopeValue(property, value) {
 			structureScope[property] = value;
 			structureScope[thisStructure.autoDim] = nL;
 		} 
-	} else {
+	} else {		
 		structureScope[property] = value;
+
+		if (property in commonScope) {
+			// Prevent common properties reseting.
+			commonScope[property] = value;
+		}
 	}
 }
 
@@ -372,12 +407,9 @@ function showResults(results, units) {
 	$(resultsDiv).empty();
 	for (index = 0; index < results.length; ++index) {
 		$(resultsDiv).append(	
-			'<div class="row">' + 
-				'<div class="col-sm-7">' + 
-					'<p>' + '\\[' + results[index] + '\\]' + '</p>' + 
-				'</div>' +
-				'<div class="col-sm-2">' + 
-					'<p><small>' + units[index] + '</small></p>' + 
+			'<div class="row">' + 				
+				'<div class="col-md-12">' + 
+					'<p>' + '\\[' + results[index] + '\\:\\mathrm{' + units[index] + '}' + '\\]' + '</p>' +
 				'</div>' +
 			'</div>'
 		);
